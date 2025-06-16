@@ -8,4 +8,23 @@ from dotenv import load_dotenv
 
 os.environ["OPENAI_API_KEY"]= os.getenv("OPENAI_API_KEY")
 os.environ["LANGCHAIN_TRACING_V2"] = "true"
-os.environ["LANGCHAIN_API_KEY"]= os.getenc("LANGCHAIN_API_KEY")
+os.environ["LANGCHAIN_API_KEY"]= os.getenv("LANGCHAIN_API_KEY")
+
+##prompt template
+
+prompt=ChatPromptTemplate.from_messages(
+    [
+        ("system","You are a helpful assistant. Please response to the queries.")
+        ("user","Question:{question}")
+    ]
+)
+
+##streamlit framework
+
+st.title("Langchain Demo WIth OPENAI API")
+input_text=st.text_input("Search the topic you want")
+
+##openAI LLM
+
+llm=ChatOpenAI(model="gpt-3.5-turbo")
+output_parser= StrOutputParser()
